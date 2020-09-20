@@ -7,11 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1>User login</h1>
 <form action="login" method="post">
-	<font color="red">${SPRING_SECURITY_LAST_EXCEPTION.message}</font><br />
+	<font color="red">${SPRING_SECURITY_LAST_EXCEPTION.message}</font>
+	<font color="green">${userCreated}</font><br />
 	Username:	<input type="text" name="username" placeholder="Enter username" /><br />
 	Password: 	<input type="password" name="password" placeholder="Enter Password"><br />
-	<input type="submit" value="Login" />
+	<input type="submit" value="Login" /><br />
+	Click <a href="registration">here</a> if you don't have Account.
 </form>
 </body>
 </html>

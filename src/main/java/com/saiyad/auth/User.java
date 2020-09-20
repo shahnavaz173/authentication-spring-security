@@ -2,20 +2,22 @@ package com.saiyad.auth;
 
 public class User {
 
-	private String id;
+	private int id;
 	private String username,password;
 	public User() {
 	}
-	public User(String id,String username, String password) {
-		super();
-		this.id = id;
+	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
-	public String getId() {
+	public User(int id,String username, String password) {
+		this(username,password);
+		this.id = id;
+	}
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getUsername() {

@@ -8,6 +8,7 @@
 <title>Home</title>
 </head>
 <body>
+<h1>Home</h1>
 	<a href="data">Data</a>
 	<c:choose>
 		<c:when test="${empty(loginUser)}">

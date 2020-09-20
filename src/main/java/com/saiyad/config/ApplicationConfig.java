@@ -8,6 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -20,6 +21,14 @@ import org.springframework.web.servlet.view.JstlView;
 @PropertySource("classpath:/props/application.properties")
 public class ApplicationConfig extends WebMvcConfigurationSupport {
 	
+	
+	@Override
+	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler(
+					"css/**","js/**","fonts/**","images/**")
+				.addResourceLocations(
+					"classpath:/css/","classpath:/js/","classpath:/fonts/","classpath:/images/");
+	}
 	@Bean
 	public InternalResourceViewResolver viewResolver(@Value("${app.view.prefix}") String prefix,
 													 @Value("${app.view.suffix}") String suffix){

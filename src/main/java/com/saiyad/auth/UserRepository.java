@@ -37,8 +37,7 @@ public class UserRepository {
 		String sql = "INSERT INTO user (username,password) VALUES ('"
 										+user.getUsername()+"','"
 										+user.getPassword()+"')";
-		int i = jdbcTemplate.update(sql);
-		System.out.println(i);
+		jdbcTemplate.update(sql);
 	}
 
 	public boolean isUserExists(String username) {

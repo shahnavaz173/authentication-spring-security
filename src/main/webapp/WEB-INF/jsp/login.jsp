@@ -1,3 +1,4 @@
+<%@page import="org.springframework.security.authentication.AuthenticationCredentialsNotFoundException"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -43,8 +44,11 @@
 	<div class="col-md-5 col-md-offset-3" style="padding:1em;box-shadow:0px 0px 2px 0px #000">
 		<form action="login" method="post">
 			<div class="login-messages" >
-				<h3  class="bg-danger text-danger">${SPRING_SECURITY_LAST_EXCEPTION.message}</h3>			
+				<c:if test="${!empty(SPRING_SECURITY_LAST_EXCEPTION) }">
+					<h3  class="bg-danger text-danger">${SPRING_SECURITY_LAST_EXCEPTION.message}</h3>			
+				</c:if>
 				<h3 class="bg-success text-success">${userCreated }</h3>
+				<c:set var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" value="" />
 			</div>
 			<div class="login-heading">
 				<h2>User Login</h2>

@@ -48,7 +48,7 @@
 					<h3  class="bg-danger text-danger">${SPRING_SECURITY_LAST_EXCEPTION.message}</h3>			
 				</c:if>
 				<h3 class="bg-success text-success">${userCreated }</h3>
-				<c:set var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" value="" />
+				<c:remove var = "SPRING_SECURITY_LAST_EXCEPTION" scope = "session" />
 			</div>
 			<div class="login-heading">
 				<h2>User Login</h2>

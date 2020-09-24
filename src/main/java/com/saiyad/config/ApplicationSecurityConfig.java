@@ -10,8 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.saiyad.auth.LoginFailureHandler;
+import com.saiyad.auth.LoginSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -23,7 +27,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 	private BCryptPasswordEncoder passwordEncoder;
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder(10);
 	}
 	
 	@Bean
@@ -48,7 +52,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
-			.loginPage("/login").permitAll()	
+			.loginPage("/login")
+			.successHandler(loginSuccessHandler())
+			.failureHandler(loginFailureHandler())
+			.permitAll()	
 			.and()
 			.logout()
 			.invalidateHttpSession(true)
@@ -56,6 +63,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/logout-success").permitAll();
 		}
-
-	
+	@Bean
+	public AuthenticationSuccessHandler loginSuccessHandler(){
+		return new LoginSuccessHandler();
+	}
+	@Bean
+	public AuthenticationFailureHandler loginFailureHandler(){
+		return new LoginFailureHandler();
+	}
 }

@@ -21,9 +21,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 	public void onAuthenticationFailure(HttpServletRequest req, HttpServletResponse res, AuthenticationException auth)
 			throws IOException, ServletException {
 		
-		AuthenticationException exception = new AuthenticationException("Incorrect Username or Password!"){
-			
-		};
+		AuthenticationException exception = new AuthenticationException("Incorrect Username or Password!"){};
 		exception.setStackTrace(auth.getStackTrace());
 		HttpSession session = req.getSession();
 		session.setAttribute("SPRING_SECURITY_LAST_EXCEPTION", exception);

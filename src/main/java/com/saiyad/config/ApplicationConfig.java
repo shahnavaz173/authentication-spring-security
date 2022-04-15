@@ -48,7 +48,7 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
 	private String password;
 	@Bean
 	public DriverManagerDataSource dataSource(){
-		password = "mysqladmin";
+		password = "root";
 		DriverManagerDataSource dataSource =
 				new DriverManagerDataSource();
 		dataSource.setDriverClassName(driverClass);
